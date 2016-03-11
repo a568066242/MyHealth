@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/top_bar"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="血压测量"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:textColor="@color/black"
+            android:id="@+id/tv_collect"
+            />
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="历史血压"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:background="@color/gray"
+            android:textColor="@color/white"
+            />
+</LinearLayout>

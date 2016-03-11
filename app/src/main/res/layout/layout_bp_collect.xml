@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_base_collect"
+        android:layout_below="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_base"/>
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_below="@+id/layout_base"
+    >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/dbp"
+    android:textSize="25sp"
+    android:padding="10dp"
+    android:id="@+id/tv_dbp"
+    android:textColor="@color/black"
+    />
+    <TextView
+    android:layout_width="60dp"
+    android:layout_height="wrap_content"
+    android:textSize="20sp"
+    android:padding="10dp"
+    android:layout_below="@+id/tv_dbp"
+    android:layout_marginLeft="18dp"
+    android:background="@drawable/biankuang_gray"
+    android:gravity="center"
+    android:id="@+id/tv_dsp_value" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/sbp"
+    android:textSize="25sp"
+    android:padding="10dp"
+    android:layout_alignParentRight="true"
+    android:textColor="@color/black"
+    android:id="@+id/tv_sbp"
+    />
+    <TextView
+    android:id="@+id/tv_bsp_value"
+    android:layout_width="60dp"
+    android:layout_height="wrap_content"
+    android:textSize="20sp"
+    android:padding="10dp"
+    android:background="@drawable/biankuang_gray"
+    android:gravity="center"
+    android:layout_below="@+id/tv_sbp"
+    android:layout_alignRight="@+id/tv_sbp"
+    android:layout_marginRight="18dp"
+    />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_below="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/xian"
+        android:id="@+id/container">
+
+        <!--<fragment-->
+            <!--android:id="@+id/fragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:name="com.bishe.lzj.myhealth.UI.DataCollect.BPFragment"-->
+            <!--tools:layout="@layout/layout_bp" />-->
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/xian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/black"
+        android:layout_above="@+id/data_collect_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/data_collect_bar"
+
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:id="@+id/click_bp">
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" -->
+                <!--android:src="@drawable/search2"/>-->
+            <TextView
+                android:id="@+id/tv_bp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/bloodpressure"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textColor="@color/darkturquoise"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/click_os">
+            <TextView
+                android:id="@+id/tv_os"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/oxygensaturation"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/click_bs">
+            <TextView
+                android:id="@+id/tv_bs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/bloodsugar"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/click_pulse">
+            <TextView
+                android:id="@+id/tv_pulse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/pulse"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/click_hr">-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_hr"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="@string/heartrate"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="28sp"-->
+                <!--android:textColor="@color/gray"/>-->
+        <!--</LinearLayout>-->
+    </LinearLayout>
+</RelativeLayout>

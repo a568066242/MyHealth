@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.bishe.lzj.myhealth.UI.DataCollect.TitleLinerLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        history_name="历史脉搏"
+        collect_name = "脉搏测量">
+    </com.bishe.lzj.myhealth.UI.DataCollect.TitleLinerLayout>
+
+    <FrameLayout
+        android:layout_below="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/xian"
+        android:id="@+id/container_inner">
+
+        <!--<fragment-->
+            <!--android:layout_below="@+id/top_bar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/fragment_inner1"-->
+            <!--android:name="com.bishe.lzj.myhealth.UI.DataCollect.BSCollectFragment"-->
+            <!--tools:layout="@layout/layout_bs_collect" />-->
+
+
+    </FrameLayout>
+
+</RelativeLayout>
