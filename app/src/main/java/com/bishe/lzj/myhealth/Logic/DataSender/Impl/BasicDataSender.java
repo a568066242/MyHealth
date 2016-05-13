@@ -8,10 +8,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bishe.lzj.myhealth.Bean.User;
 import com.bishe.lzj.myhealth.Bean.UserBasic;
+import com.bishe.lzj.myhealth.Bean.UserHealth;
 import com.bishe.lzj.myhealth.Logic.DataSender.VolleyDataSender;
+import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.UI.LoginActivity;
 import com.bishe.lzj.myhealth.UI.RegisterActivity;
 import com.bishe.lzj.myhealth.Util.LogUtil;
+import com.bishe.lzj.myhealth.Util.ToastUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,6 +110,7 @@ public class BasicDataSender extends VolleyDataSender {
             , final ErrorCallbackListener errorCallbackListener){
         LogUtil.i(TAG,"login");
         String url = getBaseURL() + ACCOUNT_URL +"/loginByName.do";
+        LogUtil.i(TAG,url);
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
@@ -140,6 +146,51 @@ public class BasicDataSender extends VolleyDataSender {
         };
         getmQueue().add(stringRequest);
     }
+
+
+    public static void getUserAllInfo(int id,final FinishedCallbackListener finishedCallbackListener){
+        String url = getBaseURL() + ACCOUNT_URL +"/getbasic.do?id="+ MyApplication.getUser().getId();
+        LogUtil.i(TAG, url);
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                LogUtil.d(TAG,s);
+                Gson gson = new Gson();
+                MyApplication.getUser().setUserBasic((UserBasic) gson.fromJson(s, new TypeToken<UserBasic>() {
+                }.getType()));
+                String url2 =getBaseURL() + ACCOUNT_URL +"/gethealth.do?id="+ MyApplication.getUser().getId() ;
+                LogUtil.i(TAG, url2);
+                StringRequest stringReques2 = new StringRequest(url2, new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String s) {
+                        LogUtil.d(TAG,s);
+                        Gson gson = new Gson();
+                        MyApplication.getUser().setUserHealth((UserHealth) gson.fromJson(s, new TypeToken<UserHealth>() {
+                        }.getType()));
+                        if(finishedCallbackListener != null){
+                            finishedCallbackListener.onFinished(null);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        ToastUtil.showShort("请求数据出错！");
+                    }
+                });
+                getmQueue().add(stringReques2);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastUtil.showShort("请求数据出错！");
+            }
+        });
+
+        getmQueue().add(stringRequest);
+
+    }
+
 
 
 }

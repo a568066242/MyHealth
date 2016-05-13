@@ -80,4 +80,6 @@ public class BloodPressure {
     public void setDate(Date date) {
         this.date = date;
     }
+
+
 }

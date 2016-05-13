@@ -10,9 +10,14 @@ import android.widget.TextView;
 
 import com.bishe.lzj.myhealth.Bean.OxygenSaturation;
 import com.bishe.lzj.myhealth.Logic.DataCollecter.DataCollector;
+import com.bishe.lzj.myhealth.Logic.DataSender.Impl.VolleyOSSender;
+import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
 import com.bishe.lzj.myhealth.Logic.Factory.DataCollectorFactory;
 import com.bishe.lzj.myhealth.Logic.Factory.Impl.SimilateDataCollectorFactory;
+import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
+
+import java.util.Date;
 
 /**
  * Created by lzj on 2016/3/1.
@@ -45,6 +50,11 @@ public class OSCollectFragment extends AbstarctCollectFragment{
     }
 
     @Override
+    protected VolleyHealthDataSender getHealthDataSender() {
+        return VolleyOSSender.instance();
+    }
+
+    @Override
     protected String getTAG() {
         return TAG;
     }
@@ -54,4 +64,14 @@ public class OSCollectFragment extends AbstarctCollectFragment{
         OxygenSaturation os = (OxygenSaturation) obj;
         tv_os_value.setText(""+os.getOs());
     }
+
+    @Override
+    protected Object getData() {
+        OxygenSaturation os = new OxygenSaturation();
+        os.setDate(new Date());
+        os.setOs(20);
+        os.setUserID(MyApplication.getUser().getId());
+        return os;
+    }
+
 }

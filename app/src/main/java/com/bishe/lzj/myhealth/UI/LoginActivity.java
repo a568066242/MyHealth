@@ -11,10 +11,12 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.bishe.lzj.myhealth.Bean.LoginInfo;
+import com.bishe.lzj.myhealth.Bean.User;
 import com.bishe.lzj.myhealth.Logic.DataSender.DataSender;
 import com.bishe.lzj.myhealth.Logic.DataSender.Impl.BasicDataSender;
 import com.bishe.lzj.myhealth.Logic.Impl.LocalLoginLogicImpl;
 import com.bishe.lzj.myhealth.Logic.LocalLoginLogic;
+import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
 import com.bishe.lzj.myhealth.Util.ToastUtil;
 
@@ -115,11 +117,22 @@ public class LoginActivity extends BaseActivity {
                             ToastUtil.show("用户名或密码错误", ToastUtil.LENGH_SHORT);
                         } else {
                             //login success
-                            localLoginLogic.saveLocalLoginInfo(new LoginInfo(is_auto,is_remember,userName,pwd));
+                            localLoginLogic.saveLocalLoginInfo(new LoginInfo(is_auto, is_remember, userName, pwd));
                             ToastUtil.show("登陆成功", ToastUtil.LENGH_SHORT);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            User user = new User();
+                            user.setId(id);
+                            user.setPassword(pwd);
+                            user.setUserName(userName);
+                            MyApplication.setUser(user);
+                            BasicDataSender.getUserAllInfo(user.getId(), new DataSender.FinishedCallbackListener() {
+                                @Override
+                                public void onFinished(Bundle bundle) {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+
                         }
                     }
                 }, new DataSender.ErrorCallbackListener() {

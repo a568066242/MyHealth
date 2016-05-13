@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bishe.lzj.myhealth.Bean.BloodPressure;
 import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,14 +19,32 @@ import java.util.Map;
  */
 public class VolleyBPSender extends VolleyHealthDataSender<BloodPressure> {
 
+    private static VolleyHealthDataSender sender = new VolleyBPSender();
+
+    private VolleyBPSender(){}
+
+    public static  VolleyHealthDataSender instance(){
+        return sender;
+    }
 
     @Override
     protected String getTAG() {
-        return null;
+        return "VolleyBPSender";
     }
 
     @Override
     protected Map<String, String> getParamMap(BloodPressure data) {
-        return null;
+        Map<String,String> params = new HashMap<>();
+
+        params.put("date",data.getDate().toString());
+        params.put("lowpressure", String.valueOf(data.getDBP()));
+        params.put("highpressure", String.valueOf(data.getSBP()));
+        params.put("id", String.valueOf(data.getUserID()));
+        return params;
+    }
+
+    @Override
+    public String getUrl() {
+        return "/addOneBP.do";
     }
 }

@@ -10,7 +10,8 @@ import com.bishe.lzj.myhealth.MyApplication;
  */
 public abstract class VolleyDataSender implements DataSender {
     private static RequestQueue mQueue = Volley.newRequestQueue(MyApplication.getContext());
-    private static String baseURL = "http://10.0.2.2:8080/HealthDataService";
+//    private static String baseURL = "http://14909i207k.51mypc.cn/HealthDataService";
+    private static String baseURL = "http://192.168.0.156:8081/HealthDataService";
 
 
 //    private static FinishedCallbackListener finishedCallbackListener;
@@ -39,4 +40,5 @@ public abstract class VolleyDataSender implements DataSender {
 //    public static void setFinishedCallbackListener(FinishedCallbackListener finishedCallbackListener) {
 //        VolleyDataSender.finishedCallbackListener = finishedCallbackListener;
 //    }
+
 }

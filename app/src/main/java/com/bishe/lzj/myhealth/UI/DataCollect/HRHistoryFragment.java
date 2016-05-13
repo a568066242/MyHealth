@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by lzj on 2016/3/1.
  */
+@Deprecated
 public class HRHistoryFragment extends Fragment {
     @Nullable
     @Override

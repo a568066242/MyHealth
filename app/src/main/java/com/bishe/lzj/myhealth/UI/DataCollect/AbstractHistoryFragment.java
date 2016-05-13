@@ -1,6 +1,7 @@
 package com.bishe.lzj.myhealth.UI.DataCollect;
 
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 
 /**
  * Created by lzj on 2016/3/2.

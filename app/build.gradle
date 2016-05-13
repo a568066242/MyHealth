@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile files('libs/volley.jar')
     compile 'com.android.support:recyclerview-v7:22.0.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jakewharton:butterknife:5.1.1'
 }

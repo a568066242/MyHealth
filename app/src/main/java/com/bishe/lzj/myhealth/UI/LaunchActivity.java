@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.bishe.lzj.myhealth.Bean.LoginInfo;
+import com.bishe.lzj.myhealth.Bean.User;
 import com.bishe.lzj.myhealth.Logic.DataSender.DataSender;
 import com.bishe.lzj.myhealth.Logic.DataSender.Impl.BasicDataSender;
 import com.bishe.lzj.myhealth.Logic.Impl.LocalLoginLogicImpl;
 import com.bishe.lzj.myhealth.Logic.LocalLoginLogic;
+import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
 import com.bishe.lzj.myhealth.Util.ToastUtil;
 
@@ -45,8 +47,8 @@ public class LaunchActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                     }
-                    String userName = loginInfo.getLastLoginUserName();
-                    String pwd = loginInfo.getLastLoginPWD();
+                    final String userName = loginInfo.getLastLoginUserName();
+                    final String pwd = loginInfo.getLastLoginPWD();
                     //send login web request
                     BasicDataSender.login(userName, pwd, new DataSender.FinishedCallbackListener() {
                         @Override
@@ -62,9 +64,20 @@ public class LaunchActivity extends BaseActivity {
 
                                 ToastUtil.show("登陆成功", ToastUtil.LENGH_SHORT);
                                 //start main activity
-                                Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
+                                User user = new User();
+                                user.setId(id);
+                                user.setPassword(pwd);
+                                user.setUserName(userName);
+                                MyApplication.setUser(user);
+                                BasicDataSender.getUserAllInfo(user.getId(), new DataSender.FinishedCallbackListener() {
+                                    @Override
+                                    public void onFinished(Bundle bundle) {
+                                        Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+
                             }
                         }
                     }, new DataSender.ErrorCallbackListener() {

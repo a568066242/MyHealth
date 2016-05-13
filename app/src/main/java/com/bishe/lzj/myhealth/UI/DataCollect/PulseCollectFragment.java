@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import com.bishe.lzj.myhealth.Bean.Pulse;
 import com.bishe.lzj.myhealth.Logic.DataCollecter.DataCollector;
+import com.bishe.lzj.myhealth.Logic.DataSender.Impl.VolleyPulseSender;
+import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
 import com.bishe.lzj.myhealth.Logic.Factory.Impl.SimilateDataCollectorFactory;
+import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
+
+import java.util.Date;
 
 /**
  * Created by lzj on 2016/3/1.
@@ -21,6 +26,10 @@ public class PulseCollectFragment extends AbstarctCollectFragment {
     private DataCollector dataCollector = SimilateDataCollectorFactory
                                 .getDataCollectorFactory().createPulseCollector();
     private TextView tv_pulse_value;
+    
+
+
+
     @Override
     protected void initViews(View view) {
         tv_pulse_value = (TextView) view.findViewById(R.id.tv_pulse_value);
@@ -42,6 +51,11 @@ public class PulseCollectFragment extends AbstarctCollectFragment {
     }
 
     @Override
+    protected VolleyHealthDataSender getHealthDataSender() {
+        return VolleyPulseSender.instance();
+    }
+
+    @Override
     protected String getTAG() {
         return TAG;
     }
@@ -51,4 +65,14 @@ public class PulseCollectFragment extends AbstarctCollectFragment {
         Pulse pulse = (Pulse) obj;
         tv_pulse_value.setText(""+pulse.getPulse());
     }
+
+    @Override
+    protected Object getData() {
+        Pulse os = new Pulse();
+        os.setDate(new Date());
+        os.setPulse(20);
+        os.setUserID(MyApplication.getUser().getId());
+        return os;
+    }
+
 }

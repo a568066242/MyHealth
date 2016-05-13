@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.bishe.lzj.myhealth.Bean.BloodPressure;
 import com.bishe.lzj.myhealth.Bean.BloodSugar;
 import com.bishe.lzj.myhealth.Logic.DataCollecter.DataCollector;
+import com.bishe.lzj.myhealth.Logic.DataSender.Impl.VolleyBSSender;
+import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
 import com.bishe.lzj.myhealth.Logic.Factory.Impl.SimilateDataCollectorFactory;
 import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
@@ -22,6 +24,7 @@ import com.bishe.lzj.myhealth.Util.LogUtil;
 import com.bishe.lzj.myhealth.Util.ToastUtil;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by lzj on 2016/3/1.
@@ -54,6 +57,11 @@ public class BSCollectFragment extends AbstarctCollectFragment {
     }
 
     @Override
+    protected VolleyHealthDataSender getHealthDataSender() {
+        return VolleyBSSender.instance();
+    }
+
+    @Override
     protected String getTAG() {
         return TAG;
     }
@@ -63,4 +71,14 @@ public class BSCollectFragment extends AbstarctCollectFragment {
         BloodSugar bs = (BloodSugar) obj;
         tv_bs_value.setText(""+bs.getBS());
     }
+
+    @Override
+    protected Object getData() {
+        BloodSugar bs = new BloodSugar();
+        bs.setDate(new Date());
+        bs.setBS(23.4);
+        bs.setUserId(MyApplication.getUser().getId());
+        return bs;
+    }
+
 }

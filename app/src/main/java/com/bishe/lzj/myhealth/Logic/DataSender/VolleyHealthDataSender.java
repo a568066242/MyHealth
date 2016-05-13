@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Created by lzj on 2016/3/4.
- * 基本健康数据
+ * 基本健康数据上传服务器
  */
 public abstract class VolleyHealthDataSender<T> extends VolleyDataSender {
 
@@ -25,11 +25,13 @@ public abstract class VolleyHealthDataSender<T> extends VolleyDataSender {
                       final FinishedCallbackListener finishedCallbackListener,
                       final ErrorCallbackListener errorCallbackListener){
             RequestQueue requestQueue = getmQueue();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, getBaseURL(), new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, getBaseURL() + "/health" + getUrl(), new Response.Listener<String>() {
                 @Override
                 public void onResponse(String s) {
-                    if(finishedCallbackListener!=null)
-                        finishedCallbackListener.onFinished(new Bundle());
+                    if(finishedCallbackListener!=null) {
+                        if(s.equals("true"))
+                            finishedCallbackListener.onFinished(new Bundle());
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -45,7 +47,8 @@ public abstract class VolleyHealthDataSender<T> extends VolleyDataSender {
             }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
-                    return getParamMap(data);
+                    Map<String, String> paramMap = getParamMap(data);
+                    return paramMap;
                 }
             };
             requestQueue.add(stringRequest);
@@ -58,5 +61,7 @@ public abstract class VolleyHealthDataSender<T> extends VolleyDataSender {
      * @return
      */
     protected abstract Map<String,String> getParamMap(T data);
+
+    public abstract String getUrl();
 }
 

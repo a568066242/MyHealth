@@ -1,11 +1,11 @@
 package com.bishe.lzj.myhealth.UI.DataCollect;
 
-import android.app.Fragment;
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +14,30 @@ import android.widget.TextView;
 
 import com.bishe.lzj.myhealth.Bean.BloodPressure;
 import com.bishe.lzj.myhealth.Logic.DataCollecter.DataCollector;
+import com.bishe.lzj.myhealth.Logic.DataSender.DataSender;
+import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
+import com.bishe.lzj.myhealth.Logic.Factory.DataCollectorFactory;
 import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
 import com.bishe.lzj.myhealth.Util.LogUtil;
 import com.bishe.lzj.myhealth.Util.ToastUtil;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by lzj on 2016/3/2.
  */
-public abstract class AbstarctCollectFragment extends Fragment implements View.OnClickListener, DataCollectActivity.ChangeDeviceNameCallbackListener {
+public abstract class AbstarctCollectFragment extends Fragment implements View.OnClickListener, DataCollectFragment.ChangeDeviceNameCallbackListener {
     public static final int SUCCESS = 0x1;
     private TextView tv_caozuo;
     private TextView tv_device;
     private Button btn_connect;
     private Button btn_collect;
     private Button btn_save;
-    private DataCollectActivity activity;
+    private Object data = null;
+//    private DataCollectActivity activity;
+    private DataCollectFragment activity;
 
     private Handler handler = new Handler(){
         @Override
@@ -57,7 +63,8 @@ public abstract class AbstarctCollectFragment extends Fragment implements View.O
 
 
     protected  void init(View view){
-        activity = (DataCollectActivity) getActivity();
+//        activity = (DataCollectActivity) getActivity();
+        activity = (DataCollectFragment) getFragmentManager().findFragmentById(R.id.container_main);
         tv_caozuo = (TextView) view.findViewById(R.id.tv_caozuo);
         tv_caozuo.setText(getCaoZuo());
         tv_device = (TextView) view.findViewById(R.id.tv_device);
@@ -94,6 +101,12 @@ public abstract class AbstarctCollectFragment extends Fragment implements View.O
      * @return
      */
     protected abstract DataCollector getDataCollector();
+
+    /**
+     * get datasender
+     * @return
+     */
+    protected abstract VolleyHealthDataSender getHealthDataSender();
 
     protected abstract String getTAG();
 
@@ -139,6 +152,7 @@ public abstract class AbstarctCollectFragment extends Fragment implements View.O
                                 Message m = handler.obtainMessage();
                                 m.what = SUCCESS;
                                 m.obj = o;
+                                data = o;
                                 handler.sendMessage(m);
                             }
                         });
@@ -148,7 +162,25 @@ public abstract class AbstarctCollectFragment extends Fragment implements View.O
                 }
                 break;
             case R.id.btn_save://上传保存按钮
-                ToastUtil.showShort("此功能还未完成");
+               // ToastUtil.showShort("此功能还未完成");
+                if(data == null){
+                    ToastUtil.showShort("请先采集数据");
+                    //先模拟一下数据
+                    data = getData();
+                    return;
+                }
+                VolleyHealthDataSender healthDataSender = getHealthDataSender();
+                healthDataSender.save(data, new DataSender.FinishedCallbackListener() {
+                    @Override
+                    public void onFinished(Bundle bundle) {
+                        ToastUtil.showShort("上传成功");
+                    }
+                }, new DataSender.ErrorCallbackListener() {
+                    @Override
+                    public void onError(String error) {
+                        ToastUtil.showShort("上传失败，请重新上传！");
+                    }
+                });
                 break;
             case R.id.btn_choose://选择按钮
                 activity.showChooseBluetoothDialog(this);
@@ -158,6 +190,14 @@ public abstract class AbstarctCollectFragment extends Fragment implements View.O
         }
 
     }
+
+    /**
+     * 模拟设置数据
+     */
+    protected abstract Object getData();
+
+
+
 
     @Override
     public void onDestroyView() {

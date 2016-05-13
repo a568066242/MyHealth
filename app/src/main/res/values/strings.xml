@@ -27,4 +27,14 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="accept">测量</string>
     <string name="reaccept">重新测量</string>
+
+    <string name="title_section1">我的信息</string>
+    <string name="title_section2">健康测量</string>
+    <string name="title_section3">疾病介绍</string>
+    <string name="title_sectionn">注销</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
 </resources>

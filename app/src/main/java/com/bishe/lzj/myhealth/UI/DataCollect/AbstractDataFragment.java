@@ -1,11 +1,11 @@
 package com.bishe.lzj.myhealth.UI.DataCollect;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,8 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
     private int current = 0;//0为测量，1为历史
     public static final int COLLECT_ID = 0;
     public static final int HISTORY_ID = 1;
-    private DataCollectActivity activity;
+//    private DataCollectActivity activity;
+    private  DataCollectFragment activity;
     private FragmentManager fragmentManager;
 
 
@@ -36,7 +37,8 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtil.w(getTAG(), "onCreateView");
-        View view = inflater.inflate(getLayoutID(), null);
+        View view = inflater.inflate(getLayoutID(), container,false);
+        init();
         initViews(view);
         return view;
     }
@@ -54,11 +56,13 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.w(getTAG(), "onCreate");
-        init();
     }
 
     private void init() {
-        activity = (DataCollectActivity) getActivity();
+        activity = (DataCollectFragment) getFragmentManager().findFragmentById(R.id.container_main);
+        if(activity == null)
+            LogUtil.i(getTAG(),"init() method ,activity is null");
+//        activity = (DataCollectActivity) getActivity();
         fragmentManager = getFragmentManager();
         if(fragmentManager == null){
             LogUtil.e(getTAG(),"fragmentManager is null");
@@ -130,19 +134,29 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
         activity.setNotClickStyle(tv_history);
     }
 
+
+    @Override
+    public void onStop() {
+        LogUtil.w(getTAG(), "onStop");
+        super.onStop();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         LogUtil.w(getTAG(), "onDestroyView");
+        if(getActivity().isFinishing())
+            return;
         removeAll();
+
+
     }
 
     private void removeAll() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.remove(getHistoryFragment());
         fragmentTransaction.remove(getCollectFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
-
 
 }

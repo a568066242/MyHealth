@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="10"
+        android:lines="8"
         android:padding="10dp"
         android:background="@drawable/biankuang"
         android:id="@+id/tv_caozuo"

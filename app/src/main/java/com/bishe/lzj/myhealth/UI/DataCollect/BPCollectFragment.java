@@ -13,7 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bishe.lzj.myhealth.Bean.BloodPressure;
+import com.bishe.lzj.myhealth.Bean.BloodSugar;
 import com.bishe.lzj.myhealth.Logic.DataCollecter.DataCollector;
+import com.bishe.lzj.myhealth.Logic.DataSender.Impl.VolleyBPSender;
+import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
 import com.bishe.lzj.myhealth.Logic.Factory.Impl.SimilateDataCollectorFactory;
 import com.bishe.lzj.myhealth.MyApplication;
 import com.bishe.lzj.myhealth.R;
@@ -21,6 +24,7 @@ import com.bishe.lzj.myhealth.Util.LogUtil;
 import com.bishe.lzj.myhealth.Util.ToastUtil;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by lzj on 2016/3/1.
@@ -31,6 +35,8 @@ public class BPCollectFragment extends AbstarctCollectFragment {
     private TextView tv_sbp_value;
     private DataCollector bloodPressureCollector = SimilateDataCollectorFactory
                                     .getDataCollectorFactory().createBloodPressureCollector();
+
+    private VolleyHealthDataSender sender = VolleyBPSender.instance();
 
     @Override
     protected void initViews(View view) {
@@ -54,6 +60,11 @@ public class BPCollectFragment extends AbstarctCollectFragment {
     }
 
     @Override
+    protected VolleyHealthDataSender getHealthDataSender() {
+        return sender;
+    }
+
+    @Override
     protected String getTAG() {
         return TAG;
     }
@@ -63,7 +74,19 @@ public class BPCollectFragment extends AbstarctCollectFragment {
         BloodPressure bp = (BloodPressure) obj;
         tv_dbp_value.setText(""+bp.getDBP());
         tv_sbp_value.setText(""+bp.getSBP());
+
     }
+
+    @Override
+    protected Object getData() {
+        BloodPressure bs = new BloodPressure();
+        bs.setDate(new Date());
+        bs.setSBP(99);
+        bs.setDBP(200);
+        bs.setUserID(MyApplication.getUser().getId());
+        return bs;
+    }
+
 
 
 }

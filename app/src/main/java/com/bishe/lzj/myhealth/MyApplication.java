@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.bishe.lzj.myhealth.Bean.User;
+import com.bishe.lzj.myhealth.Logic.DataSender.Impl.BasicDataSender;
 
 /**
  * Created by lzj on 2016/2/18.

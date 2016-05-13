@@ -93,10 +93,12 @@ public class RegisterActivity extends BaseActivity {
         LogUtil.i(TAG,phone);
         LogUtil.i(TAG,sex);
         LogUtil.i(TAG, age);
-        check(username, password, password_confirm, name, phone, age);
+        if(!check(username, password, password_confirm, name, phone, age))
+            return;
 
         //send request
         int age_n = 0;
+
         try {
             age_n = Integer.valueOf(age);
         } catch (NumberFormatException e) {
@@ -104,7 +106,7 @@ public class RegisterActivity extends BaseActivity {
             ToastUtil.show("年龄格式错误", ToastUtil.LENGH_SHORT);
             return;
         }
-        LogUtil.i(TAG,"age_n:"+age_n);
+        LogUtil.i(TAG, "age_n:" + age_n);
         if(age_n <  0){
             ToastUtil.show("年龄格式错误",ToastUtil.LENGH_SHORT);
             return;
@@ -115,11 +117,11 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onFinished(Bundle bundle) {
                         if (bundle.getBoolean("result", false)) {//register success
-                            ToastUtil.show("注册成功！",ToastUtil.LENGH_SHORT);
+                            ToastUtil.show("注册成功！", ToastUtil.LENGH_SHORT);
                             finish();
                         } else {
                             //failure
-                            ToastUtil.show("此用户名已经注册过啦，请换个用户名",ToastUtil.LENGH_SHORT);
+                            ToastUtil.show("此用户名已经注册过啦，请换个用户名", ToastUtil.LENGH_SHORT);
                         }
 
                     }
@@ -127,46 +129,53 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onError(String error) {
                         //error
-                        ToastUtil.show("服务器出现了点问题，请稍后再试！",ToastUtil.LENGH_SHORT);
+                        ToastUtil.show("服务器出现了点问题，请稍后再试！", ToastUtil.LENGH_SHORT);
                     }
                 });
     }
 
 
 
-    private void check(String username, String password, String password_confirm, String name, String phone, String age) {
+
+
+    public static boolean check(String username, String password, String password_confirm, String name, String phone, String age) {
         //check
         if(TextUtils.isEmpty(username)) {
             ToastUtil.show("请输入用户名", ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
 
         if(TextUtils.isEmpty(password)){
             ToastUtil.show("请输入密码", ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
 
         if(TextUtils.isEmpty(password_confirm) || !password.equals(password_confirm)){
             ToastUtil.show("请确保两次密码一致",ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
 
+        return check(name,age,phone);
+    }
+
+
+    public static boolean check(String name,String age,String phone){
         if(TextUtils.isEmpty(name)){
             ToastUtil.show("请输入姓名", ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
 
         if(TextUtils.isEmpty(age)){
             ToastUtil.show("请输入年龄", ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
 
         if(TextUtils.isEmpty(phone)){
             ToastUtil.show("请输入手机号",ToastUtil.LENGH_SHORT);
-            return;
+            return false;
         }
+        return true;
     }
-
 
     /**
      * after send register web request can call this to get bundle
