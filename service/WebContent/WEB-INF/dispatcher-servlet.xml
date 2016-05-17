@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:mvc="http://www.springframework.org/schema/mvc"
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	">
+	<!-- <mvc:interceptors>
+		<bean class="com.shopping.controller.MyInteceptor">
+		</bean>
+	</mvc:interceptors> -->
+	<!-- 当这个的对像，它是由spring容器创建的，用来处理rego.do的请求 -->
+	<!-- 开启@Repository、@Service和 @Controller @Component-->
+<context:component-scan base-package="com.lzj.health.*"></context:component-scan>
+<!-- 开启之后可以使用  @Resource这个注解 -->
+<context:annotation-config/>
+<!-- 开启了注解的事务管理功能    开启之后可以用@Transactional-->
+<tx:annotation-driven transaction-manager="transactionManager" />
+
+<mvc:annotation-driven />
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+						<property name="prefix" value="/jsp/"/>
+ 						<property name="suffix" value=".html"></property>
+						<property name="contentType" value="text/html;charset=UTF-8"></property>
+						<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+					</bean>
+
+<!--  实体管理类工厂 -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<!-- 加载了 META-INF/persistence.xml文件定义的 持久化单元名-->
+		<property name="persistenceUnitName"
+			value="spring_jpa_hibernatePU" />
+	</bean>
+	<!-- 创建的一个事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
+	</bean>
+</beans>

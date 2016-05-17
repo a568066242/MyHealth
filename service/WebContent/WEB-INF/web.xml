@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+<!-- 配置log4j.xml监听器 --> 
+<listener> 
+<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> 
+</listener> 
+  
+   <context-param> 
+  <param-name>log4jConfigLocation</param-name> 
+  <param-value>classpath:log4j.xml</param-value> 
+</context-param> 
+
+ <context-param> 
+  <param-name>rootLevel</param-name> 
+  <param-value>DEBUG</param-value> 
+</context-param> 
+
+<context-param> 
+  <param-name>loggingLevel</param-name> 
+  <param-value>INFO</param-value> 
+</context-param> 
+
+  <!--
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+ContextLoaderListener 它会去加载 applicationContext*.xml 这个文件  
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+--><!-- http://localhost:8888/Day30_spring_mvc01/xxx.do -->
+<!-- http://localhost:8888/Day30_spring_mvc01/xxx.do?name=值 -->
+<!-- 设置spring mvc的主控制器 ,所有的.do请求,都会到达DispatcherServlet这个类的对像,之后它在来完成对请求的转发，转发给子控制器(自己写)-->
+<!-- 子控制器中（就可以写如何调用 BIZ 以及选择要显示的页面） -->
+<!-- 	<filter>  
+        <filter-name>openSession</filter-name>  
+        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>  
+        <init-param>  
+            <param-name>singleSession</param-name>  
+            <param-value>false</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>openSession</filter-name>  
+        <url-pattern>*.do</url-pattern>  
+    </filter-mapping>   -->
+
+	<context-param>
+	    <param-name>log4jConfigLocation</param-name>
+	    <param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+  <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+   <filter>
+  	<filter-name>CharacterFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter> 
+  <filter-mapping>
+  	<filter-name>CharacterFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>

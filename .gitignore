@@ -36,4 +36,4 @@ captures/
 /charttest/
 *.iml
 /local.properties
-
+WEB-INF/lib/*.jar
