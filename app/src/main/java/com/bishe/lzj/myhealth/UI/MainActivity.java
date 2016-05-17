@@ -1,19 +1,17 @@
 package com.bishe.lzj.myhealth.UI;
 
 import android.app.Activity;
-import android.os.PersistableBundle;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-
 import com.bishe.lzj.myhealth.Bean.LoginInfo;
 import com.bishe.lzj.myhealth.Logic.Impl.LocalLoginLogicImpl;
 import com.bishe.lzj.myhealth.Logic.LocalLoginLogic;
@@ -23,9 +21,9 @@ import com.bishe.lzj.myhealth.UI.DieaseIntro.DieaseBigCateFragment;
 import com.bishe.lzj.myhealth.UI.Userinfo.UserInfoFragment;
 import com.bishe.lzj.myhealth.Util.ActivityController;
 import com.bishe.lzj.myhealth.Util.LogUtil;
-
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
 
     private static final String TAG = "MainActivity";
     /**

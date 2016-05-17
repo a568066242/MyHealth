@@ -1,4 +1,5 @@
 package com.bishe.lzj.myhealth.Bean;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -10,9 +11,12 @@ public class BloodPressure {
     private int id;
     private int userID;
     private Date date;
-    private int SBP;//收缩压
-    private int DBP;//舒张压
 
+
+    @SerializedName("highpressure")
+    private int SBP;//收缩压
+    @SerializedName("lowpressure")
+    private int DBP;//舒张压
 
     public BloodPressure() {
     }
@@ -32,6 +36,8 @@ public class BloodPressure {
         this.SBP = SBP;
         this.DBP = DBP;
     }
+
+
 
     /**
      * 获取舒张压,舒张压偏小
@@ -80,6 +86,9 @@ public class BloodPressure {
     public void setDate(Date date) {
         this.date = date;
     }
+
+
+
 
 
 }

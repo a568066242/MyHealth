@@ -1,5 +1,7 @@
 package com.bishe.lzj.myhealth.Bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -10,6 +12,8 @@ public class BloodSugar {
     private int id;
     private int userId;
     private Date date;
+
+    @SerializedName("sugar")
     private double BS;
 
 

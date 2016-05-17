@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    >
+
+
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/register_edittext_shape"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="姓名："
+            />
+
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@null"
+            android:hint="请输入姓名"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/register_edittext_shape"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <TextView
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="性别：" />
+
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            style="@style/register_et_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="男" />
+
+            <RadioButton
+                android:id="@+id/rb_female"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="女" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:background="@drawable/register_edittext_shape"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <TextView
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="年龄：" />
+
+        <EditText
+            android:id="@+id/et_age"
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@null"
+            android:hint="请输入年龄"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="15dp"
+        android:background="@drawable/register_edittext_shape"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+        <TextView
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="手机号：" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            style="@style/diease_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="phone" />
+    </LinearLayout>
+
+</LinearLayout>

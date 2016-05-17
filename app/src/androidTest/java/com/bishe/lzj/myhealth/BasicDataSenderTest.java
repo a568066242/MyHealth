@@ -7,7 +7,6 @@ import com.bishe.lzj.myhealth.Bean.User;
 import com.bishe.lzj.myhealth.Bean.UserBasic;
 import com.bishe.lzj.myhealth.Logic.DataSender.DataSender;
 import com.bishe.lzj.myhealth.Logic.DataSender.Impl.BasicDataSender;
-
 /**
  * Created by lzj on 2016/2/23.
  */

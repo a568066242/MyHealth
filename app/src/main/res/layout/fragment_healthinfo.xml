@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="15dp"
+            android:background="@drawable/register_edittext_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+
+            <TextView
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="身高:" />
+
+            <EditText
+                android:id="@+id/et_shengao"
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请输入身高（单位：厘米）"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="15dp"
+            android:background="@drawable/register_edittext_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <TextView
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="体重:" />
+            <EditText
+                android:id="@+id/et_tizhong"
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请输入体重（单位：公斤）"
+                android:inputType="numberDecimal"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/register_edittext_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <TextView
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="传染病史:"
+                android:gravity="center_vertical"
+                />
+
+            <RadioGroup
+                android:id="@+id/rg_chuanran"
+                style="@style/register_et_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_wu2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="无" />
+
+                <RadioButton
+                    android:id="@+id/rb_you2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="有" />
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/register_edittext_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <TextView
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="家族病史:"
+                android:gravity="center_vertical"
+                />
+
+            <RadioGroup
+                android:id="@+id/rg_jiazu"
+                style="@style/register_et_style"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_wu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="无" />
+
+                <RadioButton
+                    android:id="@+id/rb_you"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="有" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/register_edittext_shape"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:paddingLeft="10dp">
+
+            <TextView
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="其他病史:" />
+
+            <EditText
+                android:id="@+id/et_qita"
+                style="@style/diease_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请简要描述"
+                android:singleLine="false"
+                android:lines="4"
+                android:maxLines="10"
+                android:inputType="textMultiLine"
+                android:gravity="top"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

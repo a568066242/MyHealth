@@ -10,8 +10,14 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.bishe.lzj.myhealth.Bean.BloodPressure;
 import com.bishe.lzj.myhealth.Logic.DataSender.VolleyHealthDataSender;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +31,13 @@ public class VolleyBPSender extends VolleyHealthDataSender<BloodPressure> {
 
     public static  VolleyHealthDataSender instance(){
         return sender;
+    }
+
+
+
+    @Override
+    protected String getQueryUrl() {
+        return "/queryBP.do";
     }
 
     @Override
@@ -47,4 +60,11 @@ public class VolleyBPSender extends VolleyHealthDataSender<BloodPressure> {
     public String getUrl() {
         return "/addOneBP.do";
     }
+
+    public static List<BloodPressure> parseReturnList(String s){
+
+        return getGson().fromJson(s,new TypeToken<List<BloodPressure>>(){}.getType());
+    }
+
+
 }

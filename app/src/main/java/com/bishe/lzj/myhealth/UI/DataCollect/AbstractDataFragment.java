@@ -83,6 +83,7 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
                 convertToCollect();
 //                fragmentTransaction.hide(historyFragment);
             }else{
+
                 convertToHistory();
 //                fragmentTransaction.hide(collectFragment);
             }
@@ -114,6 +115,8 @@ public abstract  class AbstractDataFragment extends Fragment implements View.OnC
     }
 
     private void convertToHistory() {
+        LogUtil.i(getTAG(),"into history and query data from service");
+        getHistoryFragment().queryData();
         current = HISTORY_ID;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.hide(getCollectFragment());

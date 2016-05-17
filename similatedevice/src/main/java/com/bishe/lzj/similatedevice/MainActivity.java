@@ -1,7 +1,6 @@
 package com.bishe.lzj.similatedevice;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
@@ -12,14 +11,13 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
 public class MainActivity extends Activity {
-
     public static final String BLOODPRESSURE = "BLOODPRESSURE";
     public static final int BLOODPRESSURE_ID = 0x11;
     public static final String BLOODSUGAR = "BLOODSUGAR";
